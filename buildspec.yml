@@ -23,11 +23,8 @@ phases:
 artifacts:
   files:
     - '**/*' # Include all files in the build artifact
-  base-directory: '/codebuild/output/src68818475/src'
+  base-directory: '.'
 
 
-cache:
-  paths:
-    - '/root/.composer/cache' # Cache Composer dependencies
 
 
