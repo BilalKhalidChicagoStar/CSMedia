@@ -10,8 +10,7 @@ phases:
       - composer install # If your project uses Composer for PHP dependencies
   build:
     commands:
-      - echo "Listing available PHP versions"
-      - phpenv versions
+      - echo "No specific PHP version specified, using default"
       - # Add your build commands here, e.g., compile assets, run tests, etc.
   post_build:
     commands:
