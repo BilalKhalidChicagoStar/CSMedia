@@ -8,12 +8,8 @@ phases:
 
   pre_build:
     commands:
-      - echo "Starting build phase"
-      - composer install # If your project uses Composer for PHP dependencies
-      - # Add your build commands here, e.g., compile assets, run tests, etc.
-      - export AWS_ACCESS_KEY_ID=AKIAQU56JO4B4QS242WSDUB
-      - export AWS_SECRET_ACCESS_KEY=kshVMR/5muNeh8CiP4tb/iz1LghrFJQlpt0yrbtmPst6Z
-      - export AWS_DEFAULT_REGION=us-east-2
+      - echo "Installing PHP version 8.1 ..."
+      - phpenv global 8.1
 
   build:
     commands:
