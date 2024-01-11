@@ -8,13 +8,12 @@ phases:
 
   pre_build:
     commands:
-      - echo "Installing PHP version 8.1.17 ..."
-      - curl -L https://github.com/phpenv/phpenv-installer/raw/main/bin/phpenv-installer | bash
-      - echo 'export PATH="$HOME/.phpenv/bin:$PATH"' >> $HOME/.bashrc
-      - echo 'eval "$(phpenv init --path)"' >> $HOME/.bashrc
-      - exec $SHELL
-      - phpenv install 8.1.17
-      - phpenv global 8.1.17
+      - echo "Starting build phase"
+      - composer install # If your project uses Composer for PHP dependencies
+      - # Add your build commands here, e.g., compile assets, run tests, etc.
+      - export AWS_ACCESS_KEY_ID=AKIAQU56JO4B4QS242WSDUB
+      - export AWS_SECRET_ACCESS_KEY=kshVMR/5muNeh8CiP4tb/iz1LghrFJQlpt0yrbtmPst6Z
+      - export AWS_DEFAULT_REGION=us-east-2
 
   build:
     commands:
@@ -34,3 +33,5 @@ artifacts:
 cache:
   paths:
     - '/root/.composer/cache' # Cache Composer dependencies
+
+
