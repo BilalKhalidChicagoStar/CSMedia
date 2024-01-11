@@ -18,7 +18,7 @@ phases:
 artifacts:
   files:
     - '**/*' # Include all files in the build artifact
-  base-directory: '/codebuild/output/src3154577422/src' # Set the base directory for the build artifact
+  base-directory: '/codebuild/output/src68818475/src' # Set the base directory for the build artifact
 
 cache:
   paths:
