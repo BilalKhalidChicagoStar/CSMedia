@@ -24,4 +24,8 @@ cache:
   paths:
     - '/root/.composer/cache' # Cache Composer dependencies
 
-
+# Add the ArtifactsOverride section for CodePipeline
+ArtifactsOverride:
+  files:
+    - '**/*'
+  base-directory: '/codebuild/output/src68818475/src'
