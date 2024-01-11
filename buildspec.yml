@@ -4,22 +4,16 @@ phases:
   install:
     runtime-versions:
       php: 8.1
-  pre_build:
-    commands:
-      - echo "Starting pre-build phase"
-      - composer install # If your project uses Composer for PHP dependencies
+
   build:
     commands:
-      - echo "No specific PHP version specified, using default"
+      - echo "Starting build phase"
+      - composer install # If your project uses Composer for PHP dependencies
       - # Add your build commands here, e.g., compile assets, run tests, etc.
-  post_build:
-    commands:
-      - echo "Starting post-build phase"
       - aws configure set aws_access_key_id AKIAQUJO4B4QS42WSDUB
       - aws configure set aws_secret_access_key kshVMR/5muNe8CiP4tb/iz1LrFJQlpt0yrbtmPsZ
       - aws configure set default.region us-east-2
-      - aws lightsail push-container-image --service-name your-lightsail-service-name --image $CODEBUILD_RESOLVED_SOURCE_VERSION
-      - aws lightsail create-container-service-deployment --service-name your-lightsail-service-name
+      - # Add commands to deploy your WordPress application to your Lightsail instance
 
 artifacts:
   files:
@@ -29,3 +23,5 @@ artifacts:
 cache:
   paths:
     - '/root/.composer/cache' # Cache Composer dependencies
+
+
