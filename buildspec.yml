@@ -14,7 +14,6 @@ phases:
   build:
     commands:
       - echo "Starting build phase"
-      - composer install # If your project uses Composer for PHP dependencies
       - # Add your build commands here, e.g., compile assets, run tests, etc.
       - export AWS_ACCESS_KEY_ID=AKIAQUJO4B4QS42WSDUB
       - export AWS_SECRET_ACCESS_KEY=kshVMR/5muNe8CiP4tb/iz1LrFJQlpt0yrbtmPsZ
@@ -24,7 +23,8 @@ phases:
 artifacts:
   files:
     - '**/*' # Include all files in the build artifact
-  base-directory: '/codebuild/output/src68818475/src' # Set the base directory for the build artifact
+  base-directory: '/codebuild/output/src68818475/src'
+
 
 cache:
   paths:
