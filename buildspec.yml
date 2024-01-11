@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      php: 8.0
+  pre_build:
+    commands:
+      - echo "Starting pre-build phase"
+      - composer install # If your project uses Composer for PHP dependencies
+  build:
+    commands:
+      - echo "Starting build phase"
+      - # Add your build commands here, e.g., compile assets, run tests, etc.
+  post_build:
+    commands:
+      - echo "Starting post-build phase"
+      - aws configure set aws_access_key_id AKIAQUJO4B4QS42WSDUB
+      - aws configure set aws_secret_access_key kshVMR/5muNe8CiP4tb/iz1LrFJQlpt0yrbtmPsZ
+      - aws configure set default.region us-east-2
+      - aws lightsail push-container-image --service-name your-lightsail-service-name --image $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - aws lightsail create-container-service-deployment --service-name your-lightsail-service-name
+
+artifacts:
+  files:
+    - '**/*' # Include all files in the build artifact
+  base-directory: '/codebuild/output/src123456789/source' # Set the base directory for the build artifact
+
+cache:
+  paths:
+    - '/root/.composer/cache' # Cache Composer dependencies
