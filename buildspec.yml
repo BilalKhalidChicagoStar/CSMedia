@@ -6,6 +6,11 @@ phases:
     runtime-versions:
       php: 8.1
 
+  pre_build:
+    commands:
+      - echo "Installing PHP version 8.1 ..."
+      - phpenv global 8.1
+
   build:
     commands:
       - echo "Starting build phase"
@@ -19,7 +24,7 @@ phases:
 artifacts:
   files:
     - '**/*' # Include all files in the build artifact
-  base-directory: '.' # Set the base directory for the build artifact
+  base-directory: '/codebuild/output/src68818475/src' # Set the base directory for the build artifact
 
 cache:
   paths:
