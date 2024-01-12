@@ -27,18 +27,17 @@ phases:
           SSH_PRIVATE_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
           REMOTE_USER: ${{ secrets.LIGHTSAIL_USERNAME }}
-          TARGET: '/opt/bitnami/wordpress' # Set the target directory here
+          TARGET: '/opt/bitnami/apps/wordpress' # Set the target directory here
 
-      - name: Execute remote commands on Lightsail
+      - name: Restart Lightsail Services
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
           username: ${{ secrets.LIGHTSAIL_USERNAME }}
           key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           script: |
-            sudo apt-get -y update
-            sudo rsync -avz --delete /home/bitnami/ /opt/bitnami/apps/wordpress/
-            sudo chown -R bitnami:root /opt/bitnami/apps/wordpress/
+            sudo /opt/bitnami/ctlscript.sh restart
+
 
 artifacts:
   files:
