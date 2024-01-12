@@ -15,30 +15,7 @@ phases:
       - export AWS_DEFAULT_REGION=us-east-2
       - # Add commands to deploy your WordPress application to your Lightsail instance
 
-  post_build:
-    commands:
-      - echo "Starting post_build phase"
-      - aws configure set aws_access_key_id=AKIAQUJO4B4QS42WSDUB
-      - aws configure set aws_secret_access_key=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
-      - aws configure set default.region=us-east-2
 
-      - echo "Deploying to Lightsail"
-      - name: Deploy to Lightsail
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
-          REMOTE_USER: ${{ secrets.LIGHTSAIL_USERNAME }}
-          TARGET: '/opt/bitnami/apps/wordpress'
-
-      - name: Restart Lightsail Services
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
-          username: ${{ secrets.LIGHTSAIL_USERNAME }}
-          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
-          script: |
-            sudo /opt/bitnami/ctlscript.sh restart
 
 artifacts:
   files:
