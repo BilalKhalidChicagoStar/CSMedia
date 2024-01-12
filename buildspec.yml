@@ -27,7 +27,7 @@ phases:
           SSH_PRIVATE_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
           REMOTE_USER: ${{ secrets.LIGHTSAIL_USERNAME }}
-          TARGET: '/opt/bitnami/apps/wordpress' # Set the target directory here
+          TARGET: '/opt/bitnami/apps/wordpress'
 
       - name: Restart Lightsail Services
         uses: appleboy/ssh-action@master
@@ -37,6 +37,7 @@ phases:
           key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           script: |
             sudo /opt/bitnami/ctlscript.sh restart
+
 
 
 artifacts:
