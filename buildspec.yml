@@ -4,11 +4,11 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      php: 8.1
+      php: 8.1.14
 
   pre_build:
     commands:
-      - echo "Installing PHP version 8.1 ..."
+      - echo "Installing PHP version 8.1.14 ..."
 
 
 
