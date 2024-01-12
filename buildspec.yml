@@ -15,7 +15,7 @@ phases:
       - export AWS_SECRET_ACCESS_KEY=kshVMR/5muNe8CiP4tb/iz1LrFJQlpt0yrbtmPsZ
       - export AWS_DEFAULT_REGION=us-east-2
       - # Add commands to deploy your WordPress application to your Lightsail instance
-  deploy:
+  post_build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the files
