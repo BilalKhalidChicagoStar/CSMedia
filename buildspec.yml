@@ -15,12 +15,29 @@ phases:
       - export AWS_SECRET_ACCESS_KEY=kshVMR/5muNe8CiP4tb/iz1LrFJQlpt0yrbtmPsZ
       - export AWS_DEFAULT_REGION=us-east-2
       - # Add commands to deploy your WordPress application to your Lightsail instance
-
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+      - name: Deploy to Lightsail
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
+          REMOTE_USER: ${{ secrets.LIGHTSAIL_USERNAME }}
+          TARGET: '/opt/bitnami/wordpress' # Set the target directory here
+      - name: Execute remote commands on Lightsail
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          script: |
+            sudo apt-get -y update
+            sudo rsync -avz --delete /home/bitnami/ /opt/bitnami/apps/wordpress/
+            sudo chown -R bitnami:root /opt/bitnami/apps/wordpress//
 artifacts:
   files:
     - '**/*' # Include all files in the build artifact
   base-directory: '.'
-
-
-
-
