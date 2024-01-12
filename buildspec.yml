@@ -20,6 +20,7 @@ phases:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
+
       - name: Deploy to Lightsail
         uses: easingthemes/ssh-deploy@main
         env:
@@ -27,6 +28,7 @@ phases:
           REMOTE_HOST: ${{ secrets.LIGHTSAIL_PUBLIC_IP }}
           REMOTE_USER: ${{ secrets.LIGHTSAIL_USERNAME }}
           TARGET: '/opt/bitnami/wordpress' # Set the target directory here
+
       - name: Execute remote commands on Lightsail
         uses: appleboy/ssh-action@master
         with:
@@ -36,7 +38,8 @@ phases:
           script: |
             sudo apt-get -y update
             sudo rsync -avz --delete /home/bitnami/ /opt/bitnami/apps/wordpress/
-            sudo chown -R bitnami:root /opt/bitnami/apps/wordpress//
+            sudo chown -R bitnami:root /opt/bitnami/apps/wordpress/
+
 artifacts:
   files:
     - '**/*' # Include all files in the build artifact
